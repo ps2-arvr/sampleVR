@@ -86,11 +86,12 @@ function update(dt) {
 function render(dt) {
 	raycaster.setFromCamera( cursor, camera );
 	var intersects = raycaster.intersectObjects(scene.children, true);
-	if ( intersects.length > 0 ) {
+	if ( intersects.length > 1 ) {
 		for(var i=0; i < intersects.length; i++){
 			if ( intersects[i].object.name == 'loadTorus') {
 			//オブジェクトが中央に来たとき、キューブのパラメータを変化させる
-			//app.torusCube.rotation.z += 0.05;
+			//torusCube.rotation.y += 0.5;
+			//app.meshCube.rotation.x +=  0.1
 			//(function loop() {
   			len +=0.05;
   			var geometryTorus = new THREE.TorusGeometry(10, 2,30, 20,len);
@@ -100,14 +101,16 @@ function render(dt) {
 			this.scene.add( this.torusCube );
     			//if (len<2) {setInterval(loop,100000);}
 			//})();
-
+			//app.meshCube.rotation.x +=  0.1
+			//scene.remove( this.torusCube );
 			}
-
-		
+		//app.meshCube.rotation.x +=  0.1
 		}
 	
-	}
 	
+	}else if ( intersects.length > 0 ){
+	app.meshCube.rotation.x +=  0.1
+	}
 	
 	app.render(dt);
 	effect.render(scene, camera);
