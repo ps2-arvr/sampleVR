@@ -6,6 +6,12 @@ var clock = new THREE.Clock();
 var scene = new THREE.Scene();
 var app = new App(scene);
 
+var torusWidth = 1.0;
+
+var raycaster,scopedObj;
+var cursor= new THREE.Vector2(0,0);
+
+
 init();
 animate();
 
@@ -16,8 +22,11 @@ function init() {
 	container.appendChild(element);
 
 	effect = new THREE.StereoEffect(renderer);
+	//THREE.Raycaster
+	raycaster = new THREE.Raycaster();
+	this.width = 100.0;
 
-	camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 10000 );
+	camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 10000 );
 	camera.position.set(0, 0, 0);
 	scene.add(camera);
 
@@ -71,9 +80,35 @@ function update(dt) {
 
 	controls.update(dt);
 	app.update(dt);
+		
 }
-
+	var len = 0;
 function render(dt) {
+	raycaster.setFromCamera( cursor, camera );
+	var intersects = raycaster.intersectObjects(scene.children, true);
+	if ( intersects.length > 0 ) {
+		for(var i=0; i < intersects.length; i++){
+			if ( intersects[i].object.name == 'loadTorus') {
+			//オブジェクトが中央に来たとき、キューブのパラメータを変化させる
+			//app.torusCube.rotation.z += 0.05;
+			//(function loop() {
+  			len +=0.05;
+  			var geometryTorus = new THREE.TorusGeometry(10, 2,30, 20,len);
+			var materialTorus = new THREE.MeshLambertMaterial( { color: 0xf6cece } );
+			this.torusCube = new THREE.Mesh( geometryTorus, materialTorus );
+			this.torusCube.position.set(10, 0, 50);
+			this.scene.add( this.torusCube );
+    			//if (len<2) {setInterval(loop,100000);}
+			//})();
+
+			}
+
+		
+		}
+	
+	}
+	
+	
 	app.render(dt);
 	effect.render(scene, camera);
 }
