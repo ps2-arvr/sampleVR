@@ -49,29 +49,24 @@ class App {
  		 alert( err.name + ": " + err.message );
 		});
 
-		setInterval( function () {
-                  if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
-                    texture.needsUpdate = true;
-                  }
-                 } ,1000 / 24 );
-
-
-
 		var texture = new THREE.Texture( video );
                 texture.generateMipmaps = false;
                 texture.minFilter = THREE.NearestFilter;
                 texture.maxFilter = THREE.NearestFilter;
                 texture.format = THREE.RGBFormat;
 		
-		var meshSphere = new THREE.Mesh();
-		var loaderSphere = new THREE.TextureLoader();
-		//バックグラウンドの画像指定
-		//var textureSphere = loaderSphere.load( './img/photo.jpg');
-		var material = new THREE.MeshBasicMaterial( { map: texture } ) ;
-		var geometrySphere = new THREE.SphereGeometry(1000,32,32);
-		meshSphere = new THREE.Mesh( geometrySphere, material );
-		meshSphere.position.set(0, 0, 0);
-		//
+		setInterval( function () {
+                  if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
+                    texture.needsUpdate = true;
+                  }
+                 } ,1000 / 24 );
+
+		this.geometrySphere = new THREE.SphereGeometry(1000,32,32);
+		this.geometrySphere.scale(-1, 1, 1);
+		this.material = new THREE.MeshBasicMaterial( { map: texture } ) ;
+		this.meshSphere = new THREE.Mesh( this.geometrySphere, this.material);
+		this.meshSphere = new THREE.Mesh( geometrySphere, material );
+		this.meshSphere.position.set(0, 0, 0);
 		this.scene.add( meshSphere );
 	}
 
