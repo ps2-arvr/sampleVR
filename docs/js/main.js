@@ -25,7 +25,6 @@ function init() {
 	//THREE.Raycaster
 	raycaster = new THREE.Raycaster();
 	this.width = 100.0;
-
 	camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 10000 );
 	camera.position.set(0, 0, 0);
 	scene.add(camera);
@@ -83,6 +82,8 @@ function update(dt) {
 		
 }
 	var len = 0;
+	var materialTorus = new THREE.MeshLambertMaterial( { color: 0xFFFFF0 } );
+	var geometryTorus;
 function render(dt) {
 	raycaster.setFromCamera( cursor, camera );
 	var intersects = raycaster.intersectObjects(scene.children, true);
@@ -93,23 +94,27 @@ function render(dt) {
 			//torusCube.rotation.y += 0.5;
 			//app.meshCube.rotation.x +=  0.1
 			//(function loop() {
-  			len +=0.05;
-  			var geometryTorus = new THREE.TorusGeometry(10, 2,30, 20,len);
-			var materialTorus = new THREE.MeshLambertMaterial( { color: 0xf6cece } );
+			if(geometryTorus != null){
+				scene.remove( this.torusCube );
+				geometryTorus.dispose();
+			}
+  			len +=0.03;
+  			geometryTorus = new THREE.TorusGeometry(10, 1,3, 20,len);
 			this.torusCube = new THREE.Mesh( geometryTorus, materialTorus );
 			this.torusCube.position.set(10, 0, 50);
+			this.torusCube.rotation.z = 1.5;
 			this.scene.add( this.torusCube );
-    			//if (len<2) {setInterval(loop,100000);}
-			//})();
-			//app.meshCube.rotation.x +=  0.1
-			//scene.remove( this.torusCube );
 			}
-		//app.meshCube.rotation.x +=  0.1
 		}
 	
-	
-	}else if ( intersects.length > 0 ){
-	app.meshCube.rotation.x +=  0.1
+	//注視点をアイコンから離した時の処理
+	}else if (intersects.length == 1){
+		//app.meshCube.rotation.x +=  0.01
+		if(geometryTorus != null){
+			scene.remove( this.torusCube );
+			geometryTorus.dispose();
+			len = 0;
+		}	
 	}
 	
 	app.render(dt);

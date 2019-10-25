@@ -6,10 +6,10 @@ class App {
 	init() {
 		//ライトの色、光源の方向設定
 		var light = new THREE.DirectionalLight(0xFFFFFF);
-		light.position.set(0, 2, 0);
+		light.position.set(0, 0, 0);
 		scene.add( light );
 		//
-		var ambientLight = new THREE.AmbientLight(0xFFF888);
+		var ambientLight = new THREE.AmbientLight(0xFFFFFF);
 		scene.add( ambientLight );
 		//
 		this.meshCube = new THREE.Mesh();
@@ -29,6 +29,20 @@ class App {
 		//this.torusCube.position.set(10, 0, 50);
 		//this.scene.add( this.torusCube );
 		
+		navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+		// ユーザにメディアデバイス（カメラ、マイクなど）の使用をを尋ねる
+		navigator.getUserMedia(
+   		// カメラを使用して、マイクを使用しない場合
+   		{ video: true, audio: false },
+  		 // localMediaStream（カメラ映像のストリームデータが含まれる）が取得できた場合
+  		 function( localMediaStream ) {
+    		  // ここにlocalMediaStreamを取得できたときの処理を記述
+  		 },
+   		// localMediaStreamが取得できなかった場合
+   		function( err ) {
+   		   console.log( err );
+  		 }
+		);
 		
 		
 		
