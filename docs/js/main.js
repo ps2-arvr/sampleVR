@@ -138,4 +138,5 @@ function fullscreen() {
 	} else if (container.webkitRequestFullscreen) {
 		container.webkitRequestFullscreen();
 	}
+
 }

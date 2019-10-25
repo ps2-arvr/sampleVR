@@ -13,32 +13,24 @@ class App {
 		scene.add( ambientLight );
 
 		//webCameraの映像を取り込む
-		
-		// ブラウザ間差異対応
-		navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-		// ユーザにメディアデバイス（カメラ、マイクなど）の使用をを尋ねる
-		navigator.getUserMedia(
-  		 // カメラを使用して、マイクを使用しない場合
-  		 { video: true, audio: false },
- 
-   		// localMediaStream（カメラ映像のストリームデータが含まれる）が取得できた場合
-   		function( localMediaStream ) {
-   		   // ここにlocalMediaStreamを取得できたときの処理を記述
-   		},
-   		// localMediaStreamが取得できなかった場合
-  		 function( err ) {
-  		    console.log( err );
-  		 }
-		);
-		// ブラウザ間差異対応
-		window.URL = window.URL || window.webkitURL;
-		// videoエレメント作成
-		var video = document.createElement( 'video' );
-		// URLオブジェクトを作成して、videoエレメントのsrcに設定
-		video.src = window.URL.createObjectURL( localMediaStream );
-		// 動画の再生
-		video.play();
-		
+
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		var URL = window.URL || window.webkitURL;
+		var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+		var RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
+		var RTCIceCandidate = window.RTCIceCandidate || window.webkitRTCIceCandidate || window.mozRTCIceCandidate;
+
+		// フロント（イン）カメラの場合	
+		const medias = {audio : false, video : { facingMode: "user" }},
+ 		     video  = document.getElementById("video");
+
+		// リア（バック/アウト）カメラの場合
+		/* const medias = {audio : false, video : { facingMode: { exact: "environment" } }},
+ 		     video  = document.getElementById("video"); */
+
+		navigator.getUserMedia(medias, successCallback, errorCallback);	
+
+	
 		
 		// videoエレメント作成
 		//var video = document.createElement( 'video' );
@@ -92,4 +84,15 @@ class App {
 	render(dt) {
 
 	}
+
 }
+function successCallback(stream) {
+		  //video.srcObject = stream;
+		video.src = window.URL.createObjectURL( stream );
+		// 動画の再生
+		video.play();
+		};
+
+function errorCallback(error) {
+		  alert(error);
+		};
