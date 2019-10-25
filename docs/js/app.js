@@ -13,7 +13,6 @@ class App {
 		scene.add( ambientLight );
 
 		//webCameraの映像を取り込む
-
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 		var URL = window.URL || window.webkitURL;
 		var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
@@ -30,18 +29,6 @@ class App {
 
 		navigator.getUserMedia(medias, successCallback, errorCallback);	
 
-	
-		
-		// videoエレメント作成
-		//var video = document.createElement( 'video' );
-		// テクスチャにする動画の指定
-		//video.src = './video/test.mp4';
-		// 動画をループ再生
-		//video.loop = true;
-		// 動画のロード＆再生
-		//video.load();
-		//video.play();
-		
 		//videoテクスチャの作成
 		var texture = new THREE.VideoTexture( video );
 		texture.magFilter = THREE.LinearFilter;
@@ -91,8 +78,8 @@ function successCallback(stream) {
 		video.src = window.URL.createObjectURL( stream );
 		// 動画の再生
 		video.play();
-		};
+		}
 
 function errorCallback(error) {
 		  alert(error);
-		};
+		}
