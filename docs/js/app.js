@@ -23,22 +23,40 @@ class App {
 		this.meshCube.name='loadTorus'
 		
 		
-		var video = document.getElementById("video");
-		// getUserMedia によるカメラ映像の取得
-		var media = navigator.mediaDevices.getUserMedia({
- 		   video: true,//ビデオを取得する
-  		  //使うカメラをインカメラか背面カメラかを指定する場合には
-   		 //video: { facingMode: "environment" },//背面カメラ
-   		 video: { facingMode: "user" },//インカメラ
-    		audio: false,//音声が必要な場合はture
-		
+		navigator.mediaDevices = navigator.mediaDevices || ((navigator.mozGetUserMedia || navigator.webkitGetUserMedia) ? {
+   		getUserMedia: function(c) {
+   		  return new Promise(function(y, n) {
+     		  (navigator.mozGetUserMedia ||
+      		navigator.webkitGetUserMedia).call(navigator, c, y, n);
+    		 });
+   		}
+		} : null);
+		if ( !navigator.mediaDevices ) {
+ 		 alert( "getUserMedia() not supported." );
+ 		 return;
+		}
+		// Prefer camera resolution nearest to 1280x720.
+		var constraints = { audio:false, video:true };
+		navigator.mediaDevices.getUserMedia( constraints )
+		.then( function( stream ) {
+ 		 var video = document.querySelector( 'video' );
+ 		 video.srcObject = stream
+ 		 video.onloadedmetadata = function(e) {
+  		 video.play();
+ 		 };
+		})
+		.catch(function(err) {
+ 		 alert( err.name + ": " + err.message );
 		});
-		//リアルタイムに再生（ストリーミング）させるためにビデオタグに流し込む
-		media.then((stream) => {
- 		   video.srcObject = stream;
-		});
-		
-		video.play();
+
+		setInterval( function () {
+                  if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
+                    texture.needsUpdate = true;
+                  }
+                 } ,1000 / 24 );
+
+
+
 		var texture = new THREE.Texture( video );
                 texture.generateMipmaps = false;
                 texture.minFilter = THREE.NearestFilter;
@@ -48,11 +66,10 @@ class App {
 		var meshSphere = new THREE.Mesh();
 		var loaderSphere = new THREE.TextureLoader();
 		//バックグラウンドの画像指定
-		var textureSphere = loaderSphere.load( './img/photo.jpg');
-
-		var materialSphere = new THREE.MeshBasicMaterial({ map:textureSphere, side:THREE.BackSide });
+		//var textureSphere = loaderSphere.load( './img/photo.jpg');
+		var material = new THREE.MeshBasicMaterial( { map: texture } ) ;
 		var geometrySphere = new THREE.SphereGeometry(1000,32,32);
-		meshSphere = new THREE.Mesh( geometrySphere, materialSphere );
+		meshSphere = new THREE.Mesh( geometrySphere, material );
 		meshSphere.position.set(0, 0, 0);
 		//
 		this.scene.add( meshSphere );
