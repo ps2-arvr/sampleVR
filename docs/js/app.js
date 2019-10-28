@@ -12,8 +12,8 @@ class App {
 		var ambientLight = new THREE.AmbientLight(0xFFF888);
 		scene.add( ambientLight );
 
-		//webCameraの使用を始める
-		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		//webCameraの接続確認
+		//navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 		//var URL = window.URL || window.webkitURL;
 		//接続用のwindow.RTCPeerConnectionを生成、ビデオの通信をする際に必要
 		//var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
