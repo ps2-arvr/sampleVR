@@ -14,7 +14,7 @@ class App {
 
 		//webCameraの使用を始める
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-		var URL = window.URL || window.webkitURL;
+		//var URL = window.URL || window.webkitURL;
 		//接続用のwindow.RTCPeerConnectionを生成、ビデオの通信をする際に必要
 		//var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
 		//var RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
@@ -28,7 +28,7 @@ class App {
 		// リア（バック/アウト）カメラの場合
 		/* const medias = {audio : false, video : { facingMode: { exact: "environment" } }},
  		     video  = document.getElementById("video"); */
-
+		
 		navigator.getUserMedia(medias, successCallback, errorCallback);	
 
 		//videoテクスチャの作成
@@ -64,10 +64,6 @@ class App {
 		//this.meshCube.rotation.x += dt * 1.1
 		//this.meshCube.rotation.y += dt * 1.1
 		//this.meshCube.rotation.z += dt * 0.8
-
-		//this.meshCube.rotation.z += dt * 0.1
-
-		
 	}
 
 	render(dt) {

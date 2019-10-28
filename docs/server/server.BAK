@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="button" id="sample" value="送信">
+
+    <script>
+        var ws = new WebSocket('ws://echo.websocket.org');
+// WebsocketClient.readyState が OPEN になったときに呼ばれるコールバック
+ws.onopen = function () {
+    console.log("Connecting is success!!");
+    ws.send("Hello world!");
+};
+// サーバからメッセージを受信したときに呼ばれるコールバック
+// このコールバックの第一引数に messageEvent というオブジェクトが格納されている（...らしい）
+// このオブジェクトの data 属性に受け取ったメッセージが格納されている.
+ws.onmessage = function (me) {
+    var recievedData = me.data;
+    console.log("Message is exists!!");
+    console.log("recievedData: " + recievedData);
+};
+    </script>
+</body>
+</html>
