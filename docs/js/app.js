@@ -12,16 +12,18 @@ class App {
 		var ambientLight = new THREE.AmbientLight(0xFFF888);
 		scene.add( ambientLight );
 
-		//webCameraの映像を取り込む
+		//webCameraの使用を始める
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 		var URL = window.URL || window.webkitURL;
-		var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
-		var RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
-		var RTCIceCandidate = window.RTCIceCandidate || window.webkitRTCIceCandidate || window.mozRTCIceCandidate;
+		//接続用のwindow.RTCPeerConnectionを生成、ビデオの通信をする際に必要
+		//var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+		//var RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
+		//ICE Candidate: 通信経路の情報
+		//var RTCIceCandidate = window.RTCIceCandidate || window.webkitRTCIceCandidate || window.mozRTCIceCandidate;
 
 		// フロント（イン）カメラの場合	
 		const medias = {audio : false, video : { facingMode: "user" }},
- 		     video  = document.getElementById("video");
+ 		video  = document.getElementById("video");
 
 		// リア（バック/アウト）カメラの場合
 		/* const medias = {audio : false, video : { facingMode: { exact: "environment" } }},
