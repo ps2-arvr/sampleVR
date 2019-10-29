@@ -30,7 +30,7 @@ class App {
  		     video  = document.getElementById("video"); */
 		
 		//navigator.getUserMedia(medias, successCallback, errorCallback);
-		video  = document.getElementById("video");	
+		//video  = document.getElementById("video");	
 		video.play();
 		//videoテクスチャの作成
 		var texture = new THREE.VideoTexture( video );
