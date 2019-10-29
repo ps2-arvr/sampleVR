@@ -12,6 +12,7 @@ class App {
 		var ambientLight = new THREE.AmbientLight(0xFFF888);
 		scene.add( ambientLight );
 
+		alert(h);
 		//webCameraの接続確認
 		//navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 		//var URL = window.URL || window.webkitURL;
@@ -31,7 +32,7 @@ class App {
 		
 		//navigator.getUserMedia(medias, successCallback, errorCallback);
 		//video  = document.getElementById("video");	
-		video.play();
+		//video.play();
 		//videoテクスチャの作成
 		var texture = new THREE.VideoTexture( video );
 		texture.magFilter = THREE.LinearFilter;
