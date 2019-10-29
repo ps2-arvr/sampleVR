@@ -20,7 +20,7 @@
   </head>
   <body>
     <div id="example"></div>
-	<video id="video" autoplay playsinline></video>
+	
   <script src="js/lib/three.min.js"></script>
   <script src="js/lib/StereoEffect.js"></script>
   <script src="js/lib/DeviceOrientationControls.js"></script>
@@ -36,7 +36,7 @@
         cache: false,
         datatype: 'html',
         success: function(html) {
-            var h = $(html).find('video');    // 表示させたいコンテンツの要素を指定
+            var h = $(html).find('#video');    // 表示させたいコンテンツの要素を指定
             $('video').append(h);    // append関数で指定先の要素へ出力
         }
       });
@@ -45,7 +45,7 @@
   <div id="wrap">
     <!-- ここにajaxで呼び出したコンテンツ（＝要素）が出力される -->
   </div>
-
+	<video id="video" autoplay playsinline></video>
   </script>
   </body>
 </html>

@@ -23,14 +23,15 @@ class App {
 
 		// フロント（イン）カメラの場合	
 		//const medias = {audio : false, video : { facingMode: "user" }},
- 		//video  = document.getElementById("video");
+ 		
 
 		// リア（バック/アウト）カメラの場合
 		/* const medias = {audio : false, video : { facingMode: { exact: "environment" } }},
  		     video  = document.getElementById("video"); */
 		
-		//navigator.getUserMedia(medias, successCallback, errorCallback);	
-
+		//navigator.getUserMedia(medias, successCallback, errorCallback);
+		video  = document.getElementById("video");	
+		video.play();
 		//videoテクスチャの作成
 		var texture = new THREE.VideoTexture( video );
 		texture.magFilter = THREE.LinearFilter;
