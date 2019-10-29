@@ -29,6 +29,22 @@
   <script src="js/main.js"></script>
   <script>
 
+    $(function(){
+      $.ajax({
+        url: 'https://ps2-arvr.github.io/LiveSample/',    // 表示させたいコンテンツがあるページURL
+        cache: false,
+        datatype: 'html',
+        success: function(html) {
+            var h = $(html).find('video');    // 表示させたいコンテンツの要素を指定
+            $('video').append(h);    // append関数で指定先の要素へ出力
+        }
+      });
+    });
+  </script>
+  <div id="wrap">
+    <!-- ここにajaxで呼び出したコンテンツ（＝要素）が出力される -->
+  </div>
+
   </script>
   </body>
 </html>

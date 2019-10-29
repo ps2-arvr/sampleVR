@@ -22,14 +22,14 @@ class App {
 		//var RTCIceCandidate = window.RTCIceCandidate || window.webkitRTCIceCandidate || window.mozRTCIceCandidate;
 
 		// フロント（イン）カメラの場合	
-		const medias = {audio : false, video : { facingMode: "user" }},
- 		video  = document.getElementById("video");
+		//const medias = {audio : false, video : { facingMode: "user" }},
+ 		//video  = document.getElementById("video");
 
 		// リア（バック/アウト）カメラの場合
 		/* const medias = {audio : false, video : { facingMode: { exact: "environment" } }},
  		     video  = document.getElementById("video"); */
 		
-		navigator.getUserMedia(medias, successCallback, errorCallback);	
+		//navigator.getUserMedia(medias, successCallback, errorCallback);	
 
 		//videoテクスチャの作成
 		var texture = new THREE.VideoTexture( video );
@@ -71,13 +71,14 @@ class App {
 	}
 
 }
-function successCallback(stream) {
+//function successCallback(stream) {
 		  //video.srcObject = stream;
-		video.src = window.URL.createObjectURL( stream );
+		//video.src = window.URL.createObjectURL( stream );
 		// 動画の再生
-		video.play();
-		}
+		//peer.addStream(stream)
+		//video.play();
+		//}
 
-function errorCallback(error) {
-		  alert(error);
-		}
+//function errorCallback(error) {
+		  //alert(error);
+		//}
