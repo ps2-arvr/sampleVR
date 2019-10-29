@@ -12,9 +12,8 @@ class App {
 		var ambientLight = new THREE.AmbientLight(0xFFF888);
 		scene.add( ambientLight );
 
-		alert(h);
 		//webCameraの接続確認
-		//navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 		//var URL = window.URL || window.webkitURL;
 		//接続用のwindow.RTCPeerConnectionを生成、ビデオの通信をする際に必要
 		//var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
@@ -24,15 +23,14 @@ class App {
 
 		// フロント（イン）カメラの場合	
 		const medias = {audio : false, video : { facingMode: "user" }},
- 		
+ 		video  = document.getElementById("video");
 
 		// リア（バック/アウト）カメラの場合
 		/* const medias = {audio : false, video : { facingMode: { exact: "environment" } }},
  		     video  = document.getElementById("video"); */
 		
-		navigator.getUserMedia(medias, successCallback, errorCallback);
-		//video  = document.getElementById("video");	
-		//video.play();
+		navigator.getUserMedia(medias, successCallback, errorCallback);	
+		
 		//videoテクスチャの作成
 		var texture = new THREE.VideoTexture( video );
 		texture.magFilter = THREE.LinearFilter;
@@ -77,7 +75,6 @@ function successCallback(stream) {
 		  //video.srcObject = stream;
 		video.src = window.URL.createObjectURL( stream );
 		// 動画の再生
-		//peer.addStream(stream)
 		video.play();
 		}
 
