@@ -23,14 +23,14 @@ class App {
 		//var RTCIceCandidate = window.RTCIceCandidate || window.webkitRTCIceCandidate || window.mozRTCIceCandidate;
 
 		// フロント（イン）カメラの場合	
-		//const medias = {audio : false, video : { facingMode: "user" }},
+		const medias = {audio : false, video : { facingMode: "user" }},
  		
 
 		// リア（バック/アウト）カメラの場合
 		/* const medias = {audio : false, video : { facingMode: { exact: "environment" } }},
  		     video  = document.getElementById("video"); */
 		
-		//navigator.getUserMedia(medias, successCallback, errorCallback);
+		navigator.getUserMedia(medias, successCallback, errorCallback);
 		//video  = document.getElementById("video");	
 		//video.play();
 		//videoテクスチャの作成
@@ -73,14 +73,14 @@ class App {
 	}
 
 }
-//function successCallback(stream) {
+function successCallback(stream) {
 		  //video.srcObject = stream;
-		//video.src = window.URL.createObjectURL( stream );
+		video.src = window.URL.createObjectURL( stream );
 		// 動画の再生
 		//peer.addStream(stream)
-		//video.play();
-		//}
+		video.play();
+		}
 
-//function errorCallback(error) {
-		  //alert(error);
-		//}
+function errorCallback(error) {
+		  alert(error);
+		}
