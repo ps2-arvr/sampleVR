@@ -38,20 +38,21 @@ class App {
 		texture.format = THREE.RGBFormat;
 		
 		//オブジェクトを作成する
-		this.meshCube = new THREE.Mesh();
-		var geometryCube = new THREE.BoxGeometry(30,30,30);
-		var materialCube = new THREE.MeshBasicMaterial( { map: texture }  );
-		this.meshCube = new THREE.Mesh( geometryCube, materialCube );
-		this.meshCube.position.set(10, 0, 50);
-		this.scene.add( this.meshCube );
-		this.meshCube.name='loadTorus'
+		//this.meshCube = new THREE.Mesh();
+		//var geometryCube = new THREE.BoxGeometry(30,30,30);
+		//var materialCube = new THREE.MeshBasicMaterial( { map: texture }  );
+		//this.meshCube = new THREE.Mesh( geometryCube, materialCube );
+		//this.meshCube.position.set(10, 0, 50);
+		//this.scene.add( this.meshCube );
+		//this.meshCube.name='loadTorus'
 
 
 		var meshSphere = new THREE.Mesh();
-		var loaderSphere = new THREE.TextureLoader();
+		//var loaderSphere = new THREE.TextureLoader();
 		//バックグラウンドの画像指定
-		var textureSphere = loaderSphere.load( './img/photo.jpg');
-		var materialSphere = new THREE.MeshBasicMaterial({ map:textureSphere, side:THREE.BackSide });
+		//var textureSphere = loaderSphere.load( './img/photo.jpg');
+		//var materialSphere = new THREE.MeshBasicMaterial({ map:textureSphere, side:THREE.BackSide });
+		var materialSphere = new THREE.MeshBasicMaterial( { map: texture } );
 		var geometrySphere = new THREE.SphereGeometry(1000,32,32);
 		meshSphere = new THREE.Mesh( geometrySphere, materialSphere );
 		meshSphere.position.set(0, 0, 0);
