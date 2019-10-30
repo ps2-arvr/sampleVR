@@ -14,12 +14,6 @@ class App {
 
 		//webCameraの接続確認
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-		//var URL = window.URL || window.webkitURL;
-		//接続用のwindow.RTCPeerConnectionを生成、ビデオの通信をする際に必要
-		//var RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
-		//var RTCSessionDescription = window.RTCSessionDescription || window.webkitRTCSessionDescription || window.mozRTCSessionDescription;
-		//ICE Candidate: 通信経路の情報
-		//var RTCIceCandidate = window.RTCIceCandidate || window.webkitRTCIceCandidate || window.mozRTCIceCandidate;
 
 		// フロント（イン）カメラの場合	
 		const medias = {audio : false, video : { facingMode: "user" }},
@@ -36,6 +30,13 @@ class App {
 		texture.magFilter = THREE.LinearFilter;
 		texture.minFilter = THREE.LinearFilter;
 		texture.format = THREE.RGBFormat;
+
+		setInterval( function () {
+                  if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
+                    texture.needsUpdate = true;
+                  }
+                 } ,1000 / 24 );
+		
 		
 		//オブジェクトを作成する
 		//this.meshCube = new THREE.Mesh();
